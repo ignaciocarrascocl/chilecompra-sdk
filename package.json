@@ -1,0 +1,32 @@
+{
+  "name": "mercadopublico-chile",
+  "version": "1.0.0",
+  "description": "SDK tipado para consumir la API de compras públicas de Chile (Mercado Público)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TU-USUARIO/mercadopublico-chile.git"
+  },
+  "keywords": [
+    "chile",
+    "mercadopublico",
+    "chilecompra",
+    "api",
+    "sdk",
+    "licitaciones",
+    "ordenes-de-compra"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "dependencies": {
+    "cross-fetch": "^3.1.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

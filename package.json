@@ -1,5 +1,5 @@
 {
-  "name": "mercadopublico-chile",
+  "name": "chilecompra-sdk",
   "version": "1.0.0",
   "description": "SDK tipado para consumir la API de compras públicas de Chile (Mercado Público)",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TU-USUARIO/mercadopublico-chile.git"
+    "url": "git+https://github.com/ignaciocarrascocl/chilecompra-sdk.git"
   },
   "keywords": [
     "chile",

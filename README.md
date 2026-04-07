@@ -1,4 +1,6 @@
-# mercadopublico-chile 🇨🇱
+# chilecompra-sdk 🇨🇱
+
+Repository: https://github.com/ignaciocarrascocl/chilecompra-sdk
 
 SDK no oficial, fuertemente tipado para **Node.js** y **TypeScript**, para consumir la API de compras públicas del Estado de Chile ([Mercado Público](https://api.mercadopublico.cl/)).
 
@@ -9,7 +11,7 @@ Facilita la consulta de **licitaciones**, **órdenes de compra**, **compradores*
 ## 🚀 Instalación
 
 ```bash
-npm install mercadopublico-chile
+npm install chilecompra-sdk
 ```
 
 Requiere **Node.js 18 o superior** (fetch nativo). Para Node.js 14–17 pasa tu propia implementación de fetch — ver [Compatibilidad](#-compatibilidad).
@@ -21,7 +23,7 @@ Requiere **Node.js 18 o superior** (fetch nativo). Para Node.js 14–17 pasa tu 
 Para usar esta librería necesitas un **Ticket** (clave API). Puedes solicitarlo gratuitamente con tu Clave Única en la plataforma oficial de [Mercado Público](https://api.mercadopublico.cl/).
 
 ```typescript
-import { MercadoPublicoClient } from 'mercadopublico-chile';
+import { MercadoPublicoClient } from 'chilecompra-sdk';
 
 const client = new MercadoPublicoClient({
   ticket: 'TU_TICKET_AQUI',
@@ -97,7 +99,7 @@ Todos los métodos retornan `Promise<RespuestaAPI<T>>` y están completamente ti
 Los `filtros` opcionales aceptan `{ estado?, CodigoOrganismo?, CodigoProveedor? }`.
 
 ```typescript
-import { EstadoLicitacion } from 'mercadopublico-chile';
+import { EstadoLicitacion } from 'chilecompra-sdk';
 
 // Filtrar por estado y organismo
 const resultado = await client.getLicitacionesPorFecha(new Date('2024-03-15'), {
@@ -143,7 +145,7 @@ import {
   MercadoPublicoAPIError,
   MercadoPublicoRateLimitError,
   MercadoPublicoTimeoutError,
-} from 'mercadopublico-chile';
+} from 'chilecompra-sdk';
 
 try {
   await client.getLicitacionesHoy();

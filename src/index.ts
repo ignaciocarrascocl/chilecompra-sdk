@@ -1,5 +1,5 @@
 /**
- * mercadopublico-chile
+ * chilecompra-sdk
  * SDK robusto y tipado para la API de Mercado Público de Chile.
  * Documentación y comentarios en español (neutral LATAM).
  *
@@ -40,14 +40,14 @@ export class MercadoPublicoAPIError extends MercadoPublicoError {
 
 export class MercadoPublicoRateLimitError extends MercadoPublicoError {
   constructor(public readonly dailyLimit: number) {
-    super(`[MercadoPublico SDK] Límite diario alcanzado (${dailyLimit} peticiones).`);
+    super(`[ChileCompra SDK] Límite diario alcanzado (${dailyLimit} peticiones).`);
     this.name = 'MercadoPublicoRateLimitError';
   }
 }
 
 export class MercadoPublicoTimeoutError extends MercadoPublicoError {
   constructor(public readonly timeoutMs: number, public readonly url: string) {
-    super(`[MercadoPublico SDK] Tiempo de espera agotado (${timeoutMs}ms): ${url}`);
+    super(`[ChileCompra SDK] Tiempo de espera agotado (${timeoutMs}ms): ${url}`);
     this.name = 'MercadoPublicoTimeoutError';
   }
 }
@@ -233,7 +233,7 @@ export class MercadoPublicoUtils {
    */
   static assertNonEmpty(value: string, fieldName: string): void {
     if (!value || value.trim() === '') {
-      throw new MercadoPublicoError(`[MercadoPublico SDK] El campo '${fieldName}' es obligatorio y no puede estar vacío.`);
+      throw new MercadoPublicoError(`[ChileCompra SDK] El campo '${fieldName}' es obligatorio y no puede estar vacío.`);
     }
   }
 }
@@ -297,8 +297,8 @@ class RateLimiter {
 
       this.remaining--;
       const used = this.dailyLimit - this.remaining;
-      if (used === this.warningThreshold) {
-        console.warn(`[MercadoPublico SDK] Advertencia: ${used}/${this.dailyLimit} peticiones utilizadas.`);
+        if (used === this.warningThreshold) {
+        console.warn(`[ChileCompra SDK] Advertencia: ${used}/${this.dailyLimit} peticiones utilizadas.`);
       }
     }
 
@@ -355,7 +355,7 @@ async function withRetry<T>(
       lastError = err;
       if (attempt < opts.maxRetries) {
         const delay = opts.baseDelayMs * Math.pow(opts.backoffFactor, attempt);
-        console.warn(`[MercadoPublico SDK] Reintento ${attempt + 1}/${opts.maxRetries} en ${delay}ms…`);
+        console.warn(`[ChileCompra SDK] Reintento ${attempt + 1}/${opts.maxRetries} en ${delay}ms…`);
         await sleep(delay);
       }
     }
@@ -377,14 +377,14 @@ export class MercadoPublicoClient {
 
   constructor(options: MPOptions) {
     if (!options.ticket || options.ticket.trim() === '') {
-      throw new MercadoPublicoError('[MercadoPublico SDK] El ticket de autorización es obligatorio.');
+      throw new MercadoPublicoError('[ChileCompra SDK] El ticket de autorización es obligatorio.');
     }
 
     this.ticket    = options.ticket.trim();
     const resolvedFetch = options.fetch ?? globalFetch;
     if (!resolvedFetch) {
       throw new MercadoPublicoError(
-        '[MercadoPublico SDK] No se encontró `fetch` en el entorno. ' +
+        '[ChileCompra SDK] No se encontró `fetch` en el entorno. ' +
         'Actualiza a Node 18+ o pasa una implementación en MPOptions.fetch (ej: node-fetch, undici).',
       );
     }
@@ -442,7 +442,7 @@ export class MercadoPublicoClient {
 
         if (!response.ok) {
           throw new MercadoPublicoAPIError(
-            `[MercadoPublico SDK] Error HTTP ${response.status} al consultar: ${url}`,
+            `[ChileCompra SDK] Error HTTP ${response.status} al consultar: ${url}`,
             response.status,
             response.statusText,
             url,
